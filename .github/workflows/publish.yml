@@ -2,8 +2,9 @@ name: Publish Python 🐍 distribution to PyPI
 
 on:
   push:
-    tags:
-      - 'v*' # Spustí se automaticky, když vytvoříš tag začínající na "v" (např. v0.1.0)
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build-and-publish:
