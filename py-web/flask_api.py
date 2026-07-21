@@ -497,12 +497,15 @@ def run_app(p=None, cloudflare=False):
 
 # ================= CLOUDFLARE =================
 def cloudflare_web():
-    """Launches Cloudflare Tunnel in a background thread so it doesn't block Flask execution."""
+    """Launches Cloudflare Tunnel in a background thread using pycloudflared."""
     def _run_tunnel():
         time.sleep(1)  # Brief pause to ensure Flask starts listening first
         logger.info(f"Cloudflaring web http://localhost:{_port}")
         try:
-            subprocess.run(["cloudflared", "tunnel", "--url", f"http://localhost:{_port}"])
+            # Nový způsob pomocí pycloudflared (nestaráš se o systémovou cestu)
+            from pycloudflared import try_cloudflare
+            tunnel = try_cloudflare(port=_port)
+            logger.info(f"Public URL: {tunnel.tunnel}")
         except Exception as e:
             logger.error(f"Cloudflare Tunnel process stopped: {e}")
 
