@@ -1,0 +1,35 @@
+name: Publish Python 🐍 distribution to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*' # Spustí se automaticky, když vytvoříš tag začínající na "v" (např. v0.1.0)
+
+jobs:
+  build-and-publish:
+    name: Build and publish to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/flask-mini-api
+    permissions:
+      id-token: write  # TOHLE JE KLÍČ K TRUSTED PUBLISHING (žádná hesla)
+      contents: read
+    
+    steps:
+    - name: Checkout repozitáře
+      uses: actions/checkout@v4
+
+    - name: Nastavení Pythonu
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: Instalace build nástrojů
+      run: python -m pip install build
+
+    - name: Sestavení balíčku (sdist a bdist_wheel)
+      run: python -m build
+
+    - name: Nahrání na PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
