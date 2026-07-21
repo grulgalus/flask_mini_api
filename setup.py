@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='flask-mini-api',       
-    version='0.1.1',             
+    version='0.1.2',             
     description='A lightweight wrapper around Flask with built-in Cloudflare tunneling and colored logging.',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
