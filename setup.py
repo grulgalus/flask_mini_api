@@ -6,7 +6,7 @@ setup(
     description='A lightweight wrapper around Flask with built-in Cloudflare tunneling and colored logging.',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
-    author=['Gryldicek', 'dragprog'],        
+    author='Gryldicek',        
     packages=find_packages(),    
     install_requires=[           
         'Flask>=2.0.0',
